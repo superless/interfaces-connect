@@ -15,6 +15,5 @@ namespace trifenix.connect.interfaces.auth
         /// <param name="accessToken"></param>
         /// <returns>objeto con información del usuario validado</returns>
         Task<ClaimsPrincipal> ValidateAccessToken(string accessToken);
-
     }
 }
