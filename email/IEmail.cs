@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace trifenix.connect.interfaces.email
+namespace trifenix.connect.interfaces
 {
     /// <summary>
     /// interface encargada de envíar emails
