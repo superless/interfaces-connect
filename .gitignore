@@ -360,6 +360,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+<<<<<<< HEAD
 README.md
 test-project
 definition-manifest.json
@@ -371,3 +372,5 @@ trifenix-side
 
 
 
+=======
+>>>>>>> d9754d65e881cdd1580896c1f660dbce8b063f6b
