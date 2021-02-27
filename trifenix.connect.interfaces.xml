@@ -1,0 +1,299 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>trifenix.connect.interfaces</name>
+    </assembly>
+    <members>
+        <member name="T:trifenix.connect.interfaces.auth.IAuthentication">
+            <summary>
+            interface de autenticación
+            retorna objeto con datos de autenticación
+            </summary>
+        </member>
+        <member name="M:trifenix.connect.interfaces.auth.IAuthentication.ValidateAccessToken(System.String)">
+            <summary>
+            valida un usuario con un token
+            </summary>
+            <param name="accessToken"></param>
+            <returns>objeto con información del usuario validado</returns>
+        </member>
+        <member name="T:trifenix.connect.interfaces.auth.Namespace">
+             <summary>
+             ## trifenix.connect.interfaces.auth
+             Namespace donde se encontrarán las interfaces de autorización y autenticación.
+            </summary>
+        </member>
+        <member name="T:trifenix.connect.interfaces.db.IExistElement">
+            <summary>
+            Interface para mantener todas las consultas a una base de datos o colección que determinen 
+            la existencia de un elemento.
+            </summary>
+        </member>
+        <member name="M:trifenix.connect.interfaces.db.IExistElement.ExistsById``1(System.String)">
+            <summary>
+            Devuelve true si el elemento ya existe.
+            </summary>
+            <typeparam name="T">Tipo de Clase que debe ir a buscar</typeparam>
+            <param name="id">identificador a buscar</param>
+            <returns>true si existe</returns>
+        </member>
+        <member name="M:trifenix.connect.interfaces.db.IExistElement.ExistsWithPropertyValue``1(System.String,System.String,System.String)">
+            <summary>
+            Determina si existe un elemento con cierta propiedad, asignando el nombre de la propiedad y el valor que debe chequear.
+            si incluye el id, el método debería buscar en toda la base de datos, excepto el elemento con el id ingresado,
+            si no verificará si existe en todos los elementos.
+            El foco de este método es verificar.
+            </summary>
+            <typeparam name="T">Tipo de clase a buscar</typeparam>
+            <param name="namePropCheck">nombre de la propiedad</param>
+            <param name="valueCheck">valor de la propiedad</param>
+            <param name="id">identificador del elemento, que no debe ser incluido</param>
+            <returns>True si existe</returns>
+        </member>
+        <member name="T:trifenix.connect.interfaces.db.IMainGenericDb`1">
+            <summary>
+            Operaciones básicas para base de datos de persistencia
+            
+            </summary>
+            <typeparam name="T">Todos los elementos que heredan de documentbase son de base de datos de persistencia</typeparam>
+        </member>
+        <member name="M:trifenix.connect.interfaces.db.IMainGenericDb`1.CreateUpdate(`0)">
+            <summary>
+            añade o actualiza un elemento en la base de datos.
+            </summary>
+            <param name="entity">entidad a añadir o actualizar</param>
+            <returns>identificador de la entidad</returns>
+        </member>
+        <member name="M:trifenix.connect.interfaces.db.IMainGenericDb`1.GetEntity(System.String)">
+            <summary>
+            Obtiene la entidad desde un id
+            </summary>
+            <param name="uniqueId">identificador del elemento</param>
+            <returns>Retorna el elemento</returns>
+        </member>
+        <member name="M:trifenix.connect.interfaces.db.IMainGenericDb`1.DeleteEntity(System.String)">
+            <summary>
+            Borra una entidad
+            </summary>
+            <param name="id">identidicador de la entidad</param>
+            <returns></returns>
+        </member>
+        <member name="M:trifenix.connect.interfaces.db.IMainGenericDb`1.SingleQuery``1(System.String,System.Object[])">
+            <summary>
+            Ejecuta consulta en la base de datos, asignando un tipo de valor esperado,
+            esto puede ser un int, un string, un bool o incluso una entidad como Persona.
+            las consultas deben obedecer al tipo de dato esperado.
+            </summary>
+            <typeparam name="T2">Tipo de valor esperado</typeparam>
+            <param name="query">consulta a la base de datos</param>
+            <param name="args">parámetros de la consulta</param>
+            <returns>elemento de tipo T2</returns>
+        </member>
+        <member name="M:trifenix.connect.interfaces.db.IMainGenericDb`1.MultipleQuery``1(System.String,System.Object[])">
+            <summary>
+            Ejecuta una consulta en la base de datos que retornará multiples elementos de tipo T2
+            donde T2 puede ser cualquier tipo que puediera devolver la base de datos,
+            obedeciendo a la consulta como parámetro.
+            </summary>
+            <typeparam name="T2">Tipo a retornar, puede ser string, int u una entidad como Persona</typeparam>
+            <param name="query">consulta</param>
+            <param name="args">argumentos de esa consulta</param>
+            <returns></returns>
+        </member>
+        <member name="T:trifenix.connect.interfaces.IEmail">
+            <summary>
+            interface encargada de envíar emails
+            </summary>
+        </member>
+        <member name="M:trifenix.connect.interfaces.IEmail.SendEmail(System.Collections.Generic.List{System.String},System.String,System.String)">
+            <summary>
+            Envío de un email
+            </summary>
+            <param name="mails">Email del receptor</param>
+            <param name="subject">Sujeto del correo</param>
+            <param name="htmlBody">Cuerpo del corrreo</param>
+        </member>
+        <member name="T:trifenix.connect.interfaces.graph.IGraphApi">
+            <summary>
+            Manejo de usuarios en active directory
+            </summary>
+        </member>
+        <member name="M:trifenix.connect.interfaces.graph.IGraphApi.CreateUserIntoActiveDirectory(System.String,System.String)">
+            <summary>
+            Crea un usuario en active directory
+            </summary>
+            <param name="name">nombre del usuario</param>
+            <param name="email">correo</param>
+            <returns>token</returns>
+        </member>
+        <member name="T:trifenix.connect.interfaces.graph.Namespace">
+             <summary>
+             ## trifenix.connect.interfaces.graph
+             Namespace donde se encontrarán las interfaces de Microsoft graph
+             Tecnología destinada a la gestión de aplicaciones dentro del 
+             ambiente de autenticación de microsoft.
+            </summary>
+        </member>
+        <member name="T:trifenix.connect.interfaces.hash.IHashSearchHelper">
+            <summary>
+            Esta interface obliga a asignar un hash para el header, es decir lograr un hash desde el diccionario
+            e un entitySearch, es decir cuales son los nombres de los indices.
+            Esto permitirá saber si los índices han cambiado.
+            También existe un hash generado por el json de un elemento de base de datos de persistencia,
+            esto permitirá validar que el entitySearch sea un elemento de la base de datos.
+            </summary>
+        </member>
+        <member name="M:trifenix.connect.interfaces.hash.IHashSearchHelper.HashModel(System.Object)">
+            <summary>
+            Convierte un objeto en un hash
+            esto se usa para asignar un hash a un entitySearch.
+            De esta manera si el resultado de un hash de un elemento entitySearch
+            es distinto al que se espera, el objeto habrá sido corrompido.
+            </summary>
+            <param name="obj">modelo a hashear</param>
+            <returns>hash</returns>
+        </member>
+        <member name="M:trifenix.connect.interfaces.hash.IHashSearchHelper.HashHeader(System.Type)">
+            <summary>
+            Obtiene un hash de las cabeceras
+            toma las enumeraciones existentes, las convierte en un hash
+            con esto todas las colecciones tendrán un único hash.
+            Si llegase a modificar los índices de las cabeceras, el hash sería diferente al resto.
+            </summary>
+            <returns>Hash de cabeceras</returns>
+        </member>
+        <member name="T:trifenix.connect.interfaces.hash.Namespace">
+             <summary>
+             ## trifenix.connect.interfaces.hash
+             Namespace donde se encontrarán las interfaces de hash
+             que permitirán validar elementos dentro de trifenix connect.
+            </summary>
+        </member>
+        <member name="T:trifenix.connect.interfaces.log.ILogSimpleQuery">
+            <summary>
+            Interface simple de logs para registrar consultas realizadas por los métodos.
+            El fin es comparar la correctitud de las consultas.
+            </summary>
+        </member>
+        <member name="P:trifenix.connect.interfaces.log.ILogSimpleQuery.Queried">
+            <summary>
+            registra internamente las consultas
+            que se han realizado dentro de un método
+            con fines de validación.
+            </summary>
+        </member>
+        <member name="T:trifenix.connect.interfaces.log.Namespace">
+            <summary>
+            ## trifenix.connect.interfaces.hash
+            Namespace donde se encontrarán las interfaces logs
+            necesarias para dejar el registro de las actividades internas.
+            
+            ///</summary>
+        </member>
+        <member name="T:trifenix.connect.interfaces.Namespace">
+             <summary>
+             ## trifenix.connect.interfaces
+             las intefaces alojadas en este paquete no tienen dependencias. 
+             y serán todas las interfaces del proyecto trifenix connect que no tengan dependencias.
+            </summary>
+        </member>
+        <member name="T:trifenix.connect.interfaces.search.IBaseEntitySearch`1">
+            <summary>
+            Operaciones básicas de busqueda, para cualquier proyecto.
+            </summary>
+            <typeparam name="T">Tipo de dato, que representa un tipo de dato Geo</typeparam>
+        </member>
+        <member name="P:trifenix.connect.interfaces.search.IBaseEntitySearch`1.UriService">
+            <summary>
+            Url del servicio.
+            </summary>
+        </member>
+        <member name="P:trifenix.connect.interfaces.search.IBaseEntitySearch`1.ServiceKey">
+            <summary>
+            key del servicio.
+            </summary>
+        </member>
+        <member name="P:trifenix.connect.interfaces.search.IBaseEntitySearch`1.Index">
+            <summary>
+            índice del servicio
+            </summary>
+        </member>
+        <member name="M:trifenix.connect.interfaces.search.IBaseEntitySearch`1.AddElements(System.Collections.Generic.List{trifenix.connect.mdm.entity_model.IEntitySearch{`0}})">
+            <summary>
+            Añade una colección de EntitySearch a azure search
+            </summary>
+            <param name="elements">colección de entidades a añadir</param>
+        </member>
+        <member name="M:trifenix.connect.interfaces.search.IBaseEntitySearch`1.AddElement(trifenix.connect.mdm.entity_model.IEntitySearch{`0})">
+            <summary>
+            Añade un entitySearch a azure search
+            </summary>
+            <param name="element">entitySearch a agregar</param>
+        </member>
+        <member name="M:trifenix.connect.interfaces.search.IBaseEntitySearch`1.DeleteElements(System.Collections.Generic.List{trifenix.connect.mdm.entity_model.IEntitySearch{`0}})">
+            <summary>
+            Elimina una lista de entitySearch
+            </summary>
+            <param name="elements">Elimina una lista de entitySearch</param>
+        </member>
+        <member name="M:trifenix.connect.interfaces.search.IBaseEntitySearch`1.DeleteElements(System.String)">
+            <summary>
+            Elimina elementos basado en una consulta.
+            </summary>
+            <param name="query">consulta que retornará los elementos a eliminar</param>
+        </member>
+        <member name="M:trifenix.connect.interfaces.search.IBaseEntitySearch`1.EmptyIndex">
+            <summary>
+            Vacía el índice asignado en el constructor.
+            </summary>
+        </member>
+        <member name="M:trifenix.connect.interfaces.search.IBaseEntitySearch`1.FilterElements(System.String)">
+            <summary>
+            Retorna una colección de entitySearch basado en un filtro.
+            </summary>
+            <param name="filter">filtro de la consulta</param>
+            <returns>colección de entitySearch</returns>
+        </member>
+        <member name="M:trifenix.connect.interfaces.search.IBaseEntitySearch`1.CreateOrUpdateIndex">
+            <summary>
+            Inicializa o actualiza un indice.
+            </summary>
+        </member>
+        <member name="T:trifenix.connect.interfaces.translate.IGoogleTranslator">
+            <summary>
+            Interface para google translate
+            </summary>
+        </member>
+        <member name="M:trifenix.connect.interfaces.translate.IGoogleTranslator.TranslateText(System.String)">
+            <summary>
+            Método destinado a traducir al español cualquier texto en inglés.
+            </summary>
+            <param name="textToTranslate">texto a traducir</param>
+            <returns>Texto traducido</returns>
+        </member>
+        <member name="T:trifenix.connect.interfaces.translate.Namespace">
+             <summary>
+             ## trifenix.connect.interfaces.translate
+             Namespace donde se encontrarán las interfaces de traducción.
+            </summary>
+        </member>
+        <member name="T:trifenix.connect.interfaces.upload.IUploadImage">
+            <summary>
+            Interface que permite subir archivos a un repositorio
+            </summary>
+        </member>
+        <member name="M:trifenix.connect.interfaces.upload.IUploadImage.UploadImageBase64(System.String)">
+            <summary>
+            Convierte una imagen y la guarda en el repositorio
+            </summary>
+            <param name="base64">imagen en base64</param>
+            <returns></returns>
+        </member>
+        <member name="T:trifenix.connect.interfaces.upload.Namespace">
+             <summary>
+             ## trifenix.connect.interfaces.upload
+             Namespace donde se encontrarán las interfaces para subir archivos estáticos
+            </summary>
+        </member>
+    </members>
+</doc>
