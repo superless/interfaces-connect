@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using trifenix.model;
+using trifenix.connect.model;
 
 namespace trifenix.connect.interfaces.db
 {

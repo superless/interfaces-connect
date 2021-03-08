@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
-using trifenix.model;
+using trifenix.connect.model;
+
 
 namespace trifenix.connect.interfaces.db
 {
